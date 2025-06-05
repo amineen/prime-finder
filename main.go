@@ -128,7 +128,7 @@ func main() {
 
 	//fan out
 	primeFinderChannels := make([]<-chan int, CPUCount)
-	for i := range CPUCount {
+	for i := 0; i < CPUCount; i++ {
 		primeFinderChannels[i] = primeFinder(done, randIntStream)
 	}
 
