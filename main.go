@@ -28,7 +28,7 @@ func take[T any, K any](done <-chan K, stream <-chan T, n int) <-chan T {
 	taken := make(chan T)
 	go func() {
 		defer close(taken)
-		for i := 0; i <= n; i++ {
+		for i := 0; i < n; i++ {
 			select {
 			case <-done:
 				return
@@ -128,7 +128,6 @@ func main() {
 
 	//fan out
 	primeFinderChannels := make([]<-chan int, CPUCount)
-
 	for i := range CPUCount {
 		primeFinderChannels[i] = primeFinder(done, randIntStream)
 	}
